@@ -547,6 +547,34 @@ class NeedOne {
 
             this.showTeams(url);
         });
+		/* Create Modal Logic */
+
+        let modal = document.querySelector("#myModal");
+        console.log(modal);	
+
+        let url = this.URL + this.urls.division;
+
+        /* Fetch Data to Display */
+        let response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Content-Type": "application/json"
+            },
+        });
+
+        let json = await response.json();
+        console.log(json);
+        let jsonArray = json._embedded.division;
+        let targetField = document.querySelector(".addgame#division");
+        let closeField = document.querySelector("#closeModal");
+
+        document.querySelector("#app .h2").innerHTML="Chose Division"
+
+        targetField.addEventListener("click", () => {this.openModal(modal)});
+        closeField.addEventListener("click", () => {this.closeModal(modal)});
+        
+        this.fillModal(jsonArray, targetField, modal);
 
     }
 
@@ -556,19 +584,19 @@ class NeedOne {
         let div = document.createElement("div");
         div.classList.add("add");
         div.innerHTML += '\
-        <input class="addteam" id="name" placeholder="Name" name="Name" type="text"></input>\
-        <input class="addteam" id="website" placeholder="Website" name="Name" type="text"></input>\
-        <input class="addteam" id="division" placeholder="Division" name="Name" type="text"></input>\
-        <button class="addteam" id="button" type="button">Create</button>\
+        <input class="addgame" id="name" placeholder="Name" name="Name" type="text"></input>\
+        <input class="addgame" id="website" placeholder="Website" name="Name" type="text"></input>\
+        <input class="addgame" id="division" placeholder="Division" name="Name" type="text"></input>\
+        <button class="addgame" id="button" type="button">Create</button>\
         '
         this.main.appendChild(div); 
 
-        let button = document.querySelector(".addteam#button");
+        let button = document.querySelector(".addgame#button");
         button.addEventListener('click', async () =>
             {
-            let nameField = document.querySelector(".addteam#name");
-            let websiteField = document.querySelector(".addteam#website");
-            let divisonField = document.querySelector(".addteam#division");
+            let nameField = document.querySelector(".addgame#name");
+            let websiteField = document.querySelector(".addgame#website");
+            let divisonField = document.querySelector(".addgame#division");
             
             let url = this.URL+this.urls.team;
 
@@ -593,6 +621,46 @@ class NeedOne {
 
             this.showTeam(url);
         });
+		/* Create Modal Logic */
+
+        let modal = document.querySelector("#myModal");
+        console.log(modal);	
+
+        let url = this.URL + this.urls.division;
+
+        /* Fetch Data to Display */
+        let divisionResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Content-Type": "application/json"
+            },
+        });
+        url = this.URL + this.urls.team;
+
+        /* Fetch Data to Display */
+        let teamResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Content-Type": "application/json"
+            },
+        });
+
+        let divisionJson = await divisionResponse.json();
+        let teamJson = await teamResponse.json();
+        console.log(json);
+        let divisionJsonArray = divisionJson._embedded.division;
+        let teamJsonArray = teamJson._embedded.team;
+        let targetField = document.querySelector(".addgame#division");
+        let closeField = document.querySelector("#closeModal");
+
+        document.querySelector("#app .h2").innerHTML="Chose Division"
+
+        targetField.addEventListener("click", () => {this.openModal(modal)});
+        closeField.addEventListener("click", () => {this.closeModal(modal)});
+        
+        this.fillModal(jsonArray, targetField, modal);
 
     }
 
