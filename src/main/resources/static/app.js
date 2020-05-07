@@ -325,7 +325,7 @@ class NeedOne {
         }
 
         this.main.appendChild(div);
-
+        this.showAddGame();
     }
 
     async showGame(url) 
@@ -399,7 +399,7 @@ class NeedOne {
 
             let request = {
                 name: nameField.value,
-                divisions: divisionsField.value,
+                //divisions: divisionsField.value,
             }
 
             let response = await fetch(url, {
@@ -566,7 +566,7 @@ class NeedOne {
         let json = await response.json();
         console.log(json);
         let jsonArray = json._embedded.division;
-        let targetField = document.querySelector(".addgame#division");
+        let targetField = document.querySelector(".addteam#division");
         let closeField = document.querySelector("#closeModal");
 
         document.querySelector("#app .h2").innerHTML="Chose Division"
@@ -580,12 +580,11 @@ class NeedOne {
 
     async showAddGame() 
     {
-        console.log("showAddDivision()");
         let div = document.createElement("div");
         div.classList.add("add");
         div.innerHTML += '\
         <input class="addgame" id="name" placeholder="Name" name="Name" type="text"></input>\
-        <input class="addgame" id="website" placeholder="Website" name="Name" type="text"></input>\
+        <input class="addgame" id="team" placeholder="Winner Team" name="Name" type="text"></input>\
         <input class="addgame" id="division" placeholder="Division" name="Name" type="text"></input>\
         <button class="addgame" id="button" type="button">Create</button>\
         '
@@ -595,10 +594,10 @@ class NeedOne {
         button.addEventListener('click', async () =>
             {
             let nameField = document.querySelector(".addgame#name");
-            let websiteField = document.querySelector(".addgame#website");
+            let websiteField = document.querySelector(".addgame#team");
             let divisonField = document.querySelector(".addgame#division");
             
-            let url = this.URL+this.urls.team;
+            let url = this.URL+this.urls.game;
 
             let request = {
                 name: nameField.value,
@@ -619,12 +618,13 @@ class NeedOne {
             let json = await response.json();
             console.log(json);
 
-            this.showTeam(url);
+            this.showGame(url);
         });
 		/* Create Modal Logic */
 
-        let modal = document.querySelector("#myModal");
-        console.log(modal);	
+        let divisionModal = document.querySelector("#myModal");
+        let teamModal = document.querySelector("#myModal2");
+
 
         let url = this.URL + this.urls.division;
 
@@ -649,18 +649,23 @@ class NeedOne {
 
         let divisionJson = await divisionResponse.json();
         let teamJson = await teamResponse.json();
-        console.log(json);
         let divisionJsonArray = divisionJson._embedded.division;
         let teamJsonArray = teamJson._embedded.team;
-        let targetField = document.querySelector(".addgame#division");
-        let closeField = document.querySelector("#closeModal");
+        let divisionTargetField = document.querySelector(".addgame#division");
+        let teamTargetField = document.querySelector(".addgame#team");
+        let divisionCloseField = divisionModal.querySelector("#closeModal");
+        let teamCloseField = teamModal.querySelector("#closeModal");
 
-        document.querySelector("#app .h2").innerHTML="Chose Division"
+        divisionModal.querySelector(".h2").innerHTML="Chose Division"
+        teamModal.querySelector(".h2").innerHTML="Chose Team"
 
-        targetField.addEventListener("click", () => {this.openModal(modal)});
-        closeField.addEventListener("click", () => {this.closeModal(modal)});
-        
-        this.fillModal(jsonArray, targetField, modal);
+        teamTargetField.addEventListener("click", () => {this.openModal(teamModal)});
+        divisionTargetField.addEventListener("click", () => {this.openModal(divisionModal)});
+        divisionCloseField.addEventListener("click", () => { this.closeModal(divisionModal) });
+        teamCloseField.addEventListener("click", () => { this.closeModal(teamModal) });
+       
+        this.fillModal(divisionJsonArray, divisionTargetField, divisionModal);
+        this.fillModal(teamJsonArray, teamTargetField, teamModal);
 
     }
 
@@ -683,14 +688,14 @@ class NeedOne {
         for (let i = 0; i < jsonArray.length; i++) 
         {
             modalEleList.innerHTML+=`
-            <li class="listElement" id="element`+jsonArray[i].name+`">`+jsonArray[i].name+`</li>`
+            <li class="listElement" id="element`+jsonArray[i].name.replace(' ','')+`">`+jsonArray[i].name+`</li>`
             ;
         }
 
         for (let i = 0; i < jsonArray.length; i++) 
         {
             let li = modalEleList
-                .querySelector(".listElement#element"+jsonArray[i].name);
+                .querySelector(".listElement#element"+jsonArray[i].name.replace(' ',''));
             li.addEventListener("click", () => 
                 {
                     targetField.value = jsonArray[i]._links.self.href.replace(this.URL,"");
@@ -710,6 +715,7 @@ window.addEventListener("load", async () =>
         liga: "api/liga/",
         division: "api/division/",
         team: "api/team/",
+        game: "api/game/",
     };
 
 
