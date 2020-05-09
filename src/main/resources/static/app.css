@@ -1,28 +1,74 @@
 #app .dummy{}
 
+html {
+	background-color: ;
+	color: #3c2736;
+}
+
 #app {
     font-size: 2em;
+}
+
+@media screen and (max-width: 1000px) {
+	#app { 
+		font-size: 3em;
+	}
 }
 #app > header {
     display: flex;
     justify-content: space-between;
 }
 
-.top#left {
+#app > div > a {
+    
+}
+
+.top > a {
+	background: #c18b93;
+	//border-style: solid;
+	border-radius: 3px;
+}
+
+.top#left > a {
     align: left;
 }
 
-.top#mid {
+.top#mid > a {
     align: center;
 }
 
-.top#right {
+.top#right > a {
     align: right;
 }
 
 #app > main {
     display: flex;
     justify-content: space-between;
+	margin-top: 1em;
+}
+
+#app > main > div:nth-child(1) {
+	width: 49%;
+	margin-right: 0.2em;
+	border-style-left: solid
+}
+
+#app > main > div:nth-child(1) > div {
+	border-left-style: solid;
+	margin-top: 0.5em;
+	border-radius: 3px;
+	border-color: #3c2736;
+}
+
+#app > main > div:nth-child(1) > div:hover {
+	background-color: #67676f;
+	color: #f8f4ef;
+	border-color: #3c2736;
+}
+
+#app > main > div:nth-child(2) {
+	width: 49%;
+	margin-left: 0.2em;
 }
 #app > main > div {
     display: flex;
@@ -93,12 +139,12 @@
 
 /* Modal Content  TODO make all margin auto for bigger screen*/
 #app .modal-content {
-  font-size: 0.5em;
+  font-size: 0.8em;
   position: relative;
   margin: auto auto auto 0;
   padding: 0;
   border-radius: 3em;
-  width: 10em;
+  //width: 10em;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -152,7 +198,7 @@
 #app .h2{
   text-align: center;
   margin-bottom: 0.5em;
-  font-size: 0.7em;
+  font-size: 1em;
 }
 
 #app img{

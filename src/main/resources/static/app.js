@@ -76,7 +76,7 @@ class NeedOne {
             let innerDiv = document.createElement("div");
             let a = document.createElement("a");
 
-            a.innerHTML += x.name+i;
+            a.innerHTML += x.name;
             innerDiv.appendChild(a);
             div.appendChild(innerDiv);
             targetUrls[i] = x._links.self.href;
@@ -91,7 +91,7 @@ class NeedOne {
         }
 
         this.main.appendChild(div);
-        this.showAddLiga();
+        this.showAddLiga(url);
     }
 
 
@@ -137,7 +137,7 @@ class NeedOne {
 
         this.main.appendChild(div);
 
-        this.showAddDivision();
+        this.showAddDivision(url);
 
     }
 
@@ -232,7 +232,7 @@ class NeedOne {
 
         this.main.appendChild(div);
 
-        this.showAddTeam();
+        this.showAddTeam(url);
     }
 
     async showTeam(url) 
@@ -325,7 +325,7 @@ class NeedOne {
         }
 
         this.main.appendChild(div);
-        this.showAddGame();
+        this.showAddGame(url);
     }
 
     async showGame(url) 
@@ -377,7 +377,7 @@ class NeedOne {
 
     }
 
-    async showAddLiga() 
+    async showAddLiga(orgUrl) 
     {
         console.log("showAddLiga()");
         let div = document.createElement("div");
@@ -415,12 +415,12 @@ class NeedOne {
             let json = await response.json();
             console.log(json);
 
-            this.showLigas(url);
+            this.showLigas(orgUrl);
         });
 
     }
     
-    async showAddDivision() 
+    async showAddDivision(orgUrl) 
     {
         console.log("showAddDivision()");
 
@@ -461,7 +461,7 @@ class NeedOne {
             let json = await response.json();
             console.log(json);
 
-            this.showDivisions(url);
+            this.showDivisions(orgUrl);
         });
 
 		/* Create Modal Logic */
@@ -489,6 +489,7 @@ class NeedOne {
         document.querySelector("#app .h2").innerHTML="Chose Liga"
 
         targetField.addEventListener("click", () => {this.openModal(modal)});
+        targetField.addEventListener("focus", () => {this.openModal(modal)});
         closeField.addEventListener("click", () => {this.closeModal(modal)});
         
         this.fillModal(jsonArray, targetField, modal);
@@ -504,7 +505,7 @@ class NeedOne {
         modal.style.display = "none";
     }
 
-    async showAddTeam() 
+    async showAddTeam(orgUrl) 
     {
         console.log("showAddDivision()");
         let div = document.createElement("div");
@@ -545,7 +546,7 @@ class NeedOne {
             let json = await response.json();
             console.log(json);
 
-            this.showTeams(url);
+            this.showTeams(orgUrl);
         });
 		/* Create Modal Logic */
 
@@ -572,13 +573,14 @@ class NeedOne {
         document.querySelector("#app .h2").innerHTML="Chose Division"
 
         targetField.addEventListener("click", () => {this.openModal(modal)});
+        targetField.addEventListener("focus", () => {this.openModal(modal)});
         closeField.addEventListener("click", () => {this.closeModal(modal)});
         
         this.fillModal(jsonArray, targetField, modal);
 
     }
 
-    async showAddGame() 
+    async showAddGame(orgUrl) 
     {
         let div = document.createElement("div");
         div.classList.add("add");
@@ -618,7 +620,7 @@ class NeedOne {
             let json = await response.json();
             console.log(json);
 
-            this.showGame(url);
+            this.showGame(orgUrl);
         });
 		/* Create Modal Logic */
 
@@ -660,7 +662,9 @@ class NeedOne {
         teamModal.querySelector(".h2").innerHTML="Chose Team"
 
         teamTargetField.addEventListener("click", () => {this.openModal(teamModal)});
+        teamTargetField.addEventListener("focus", () => {this.openModal(teamModal)});
         divisionTargetField.addEventListener("click", () => {this.openModal(divisionModal)});
+        divisionTargetField.addEventListener("focus", () => {this.openModal(divisionModal)});
         divisionCloseField.addEventListener("click", () => { this.closeModal(divisionModal) });
         teamCloseField.addEventListener("click", () => { this.closeModal(teamModal) });
        
