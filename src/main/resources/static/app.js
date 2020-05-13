@@ -378,7 +378,6 @@ class NeedOne {
         div.classList.add("add");
         div.innerHTML += '\
         <input class="addliga" id="name" placeholder="Name" name="Name" type="text"></input>\
-        <input class="addliga" id="divisions" placehoder="Division" name="Name" type="text"></input>\
         <button class="addliga" id="button" type="button">Create</button>\
         '
         this.main.appendChild(div); 
@@ -387,13 +386,11 @@ class NeedOne {
         button.addEventListener('click', async () =>
             {
             let nameField = document.querySelector(".addliga#name");
-            let divisionsField = document.querySelector(".addliga#divisions");
             
             let url = this.URL+this.urls.liga;
 
             let request = {
                 name: nameField.value,
-                //divisions: divisionsField.value,
             }
 
             let response = await fetch(url, {
