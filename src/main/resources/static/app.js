@@ -33,18 +33,12 @@ class NeedOne {
         self.addEventListener("click", () => 
             { this.showLiga(json._links.self.href) });
 
-        let liga = document.createElement("div");
-        liga.innerHTML = json._links.liga.href;
-        liga.addEventListener("click", () => 
-            { this.showLiga(json._links.liga.href) });
-
         let divisions = document.createElement("div");
         divisions.innerHTML = json._links.divisions.href;
         divisions.addEventListener("click", () => 
             { this.showDivisions(json._links.divisions.href) });
 
         div.appendChild(self);
-        div.appendChild(liga);
         div.appendChild(divisions);
 
         this.main.appendChild(div);
