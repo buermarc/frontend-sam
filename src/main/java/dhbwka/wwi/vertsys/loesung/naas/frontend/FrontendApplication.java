@@ -6,6 +6,8 @@
  * 
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
+ *
+ * Danke für die Vorlage :D
  */
 package dhbwka.wwi.vertsys.loesung.naas.frontend;
 
@@ -29,7 +31,7 @@ public class FrontendApplication {
         logger.info("");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         logger.info(">>> Frontend-Server der Web-Anwendung <<<");
-        logger.info(">>> http://localhost:8079/            <<<");
+        logger.info(">>> http://localhost:1234/            <<<");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         logger.info("");
         logger.info("");

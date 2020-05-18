@@ -513,14 +513,14 @@ class NeedOne {
         button.addEventListener('click', async () =>
             {
             let nameField = document.querySelector(".addteam#name");
-            let websiteField = document.querySelector(".addteam#website");
+            let winnerTeam = document.querySelector(".addteam#website");
             let divisonField = document.querySelector(".addteam#division");
             
             let url = this.URL+this.urls.team;
 
             let request = {
                 name: nameField.value,
-                website: websiteField.value,
+                website: winnerTeam.value,
                 division: division.value,
             }
 
@@ -594,7 +594,7 @@ class NeedOne {
 
             let request = {
                 name: nameField.value,
-                website: websiteField.value,
+                winnerTeam: websiteField.value,
                 division: division.value,
             }
 
